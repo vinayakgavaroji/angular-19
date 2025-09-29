@@ -1,0 +1,9 @@
+<nav class="navbar navbar-expand-lg navbar-gradient p-3">
+    <div class="container-fluid">
+        <a class="navbar-brand text-gradient fw-bold" routerLink="/">MyApp</a>
+        <div class="d-flex ms-auto">
+            <button *ngIf="auth.isLoggedIn$()" class="btn btn-outline-light me-2" (click)="logout()">Logout</button>
+            <a *ngIf="!auth.isLoggedIn$()" routerLink="/login" class="btn btn-outline-light">Login</a>
+        </div>
+    </div>
+</nav>

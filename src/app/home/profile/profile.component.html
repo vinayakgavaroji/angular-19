@@ -1,0 +1,40 @@
+<div class="profile-wrapper d-flex align-items-center justify-content-center">
+    <div class="card profile-card shadow-lg p-5">
+        <h2 class="text-center mb-3 fw-bold text-gradient">My Profile</h2>
+        <p class="text-center text-muted mb-4">Update your personal information</p>
+
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Name</label>
+                <input type="text" class="form-control form-control-lg" formControlName="name"
+                    placeholder="Enter your name">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control form-control-lg" formControlName="email"
+                    placeholder="Enter your email">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Contact Number</label>
+                <input type="text" class="form-control form-control-lg" formControlName="contact"
+                    placeholder="Enter your contact number">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Bio</label>
+                <textarea class="form-control form-control-lg" formControlName="bio" rows="3"
+                    placeholder="Write something about yourself"></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Profile Picture</label>
+                <input type="file" class="form-control" (change)="onFileChange($event)">
+            </div>
+
+            <button type="submit" class="btn btn-gradient btn-lg w-100" [disabled]="profileForm.invalid">Save
+                Profile</button>
+        </form>
+    </div>
+</div>

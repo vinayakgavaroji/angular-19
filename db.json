@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "vinayak@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "2",
+      "email": "jane@example.com",
+      "password": "abcdef"
+    },
+    {
+      "id": "c832",
+      "name": "Jack Sparrow",
+      "email": "jack@gmail.com",
+      "password": "Jack@1332"
+    },
+    {
+      "id": "823f",
+      "name": "john",
+      "email": "john@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "9501",
+      "name": "Tony Stark",
+      "email": "tony@gmail.com",
+      "password": "Tony@1332"
+    }
+  ]
+}

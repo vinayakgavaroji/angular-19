@@ -1,0 +1,54 @@
+<div class="signup-wrapper d-flex align-items-center justify-content-center">
+    <div class="card signup-card shadow-lg p-5">
+        <h2 class="text-center mb-3 fw-bold text-gradient">Create Account</h2>
+        <p class="text-center text-muted mb-4">Sign up to get started</p>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Name</label>
+                <input type="text" class="form-control form-control-lg" formControlName="name"
+                    placeholder="Enter your name">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control form-control-lg" formControlName="email"
+                    placeholder="Enter your email">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Password</label>
+                <input type="password" class="form-control form-control-lg" formControlName="password"
+                    placeholder="Enter password">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Confirm Password</label>
+                <input type="password" class="form-control form-control-lg" formControlName="confirmPassword"
+                    placeholder="Confirm password">
+
+                <!-- Password mismatch error -->
+                <div class="text-danger mt-1"
+                    *ngIf="signupForm.errors?.['mismatch'] && (signupForm.controls['confirmPassword'].touched || submitted)">
+                    Passwords do not match
+                </div>
+            </div>
+
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" formControlName="acceptTerms" id="acceptTerms">
+                <label class="form-check-label" for="acceptTerms">
+                    I accept the terms and conditions
+                </label>
+
+            </div>
+
+            <button [disabled]="submitted && signupForm.invalid" type="submit" class="btn btn-gradient btn-lg w-100">Sign Up</button>
+        </form>
+
+        <div *ngIf="message" class="alert alert-danger mt-3">{{ message }}</div>
+
+        <p class="text-center mt-4">Already have an account?
+            <a [routerLink]="'/login'" class="text-gradient fw-semibold">Login</a>
+        </p>
+    </div>
+</div>
