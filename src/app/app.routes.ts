@@ -7,7 +7,7 @@ import { ProfileComponent } from './home/profile/profile.component';
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'sign-up', component: SignUpComponent },
-    { path: 'home', component: HomeComponent }, 
+    { path: 'home', loadComponent: () => import('./home/home.component').then((m) => m.HomeComponent) }, 
     { path: 'profile', component: ProfileComponent },
     { path: '**', redirectTo: 'login', pathMatch: "full" }
 ];
