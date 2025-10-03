@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { SharedService } from '../../../services/shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,11 +10,45 @@ import { RouterModule } from '@angular/router';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup;
+  email!: string;
+  usersData: any;
 
-  constructor() {
+  ngOnInit() {
+    this.email = decodeURIComponent(this.route.snapshot.paramMap.get('email') ?? '');
+
+    this.shared.getDetailsByEmailId(this.email).subscribe(userData => {
+      if (userData && userData.length > 0) {
+        const user = userData[0];
+        this.profileForm.patchValue({
+          name: user.name,
+          email: user.email,
+          contact: user.contact,
+          bio: user.bio,
+          profilePicture: user.profilePicture
+        });
+      }
+    });
+
+    this.shared.getProfilesByEmail(this.email).subscribe(proData => {
+      if (proData && proData.length > 0) {
+        const profile = proData[0];
+        this.profileForm.patchValue({
+          contact: profile.contactNo,
+          bio: profile.bio,
+          profilePicture: profile.profilePicture
+        });
+      }
+    })
+
+    this.shared.getAllUsers().subscribe((res) => {
+      this.usersData = res;
+    })
+  }
+
+  constructor(private route: ActivatedRoute, private shared: SharedService) {
     this.profileForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),

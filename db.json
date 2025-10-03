@@ -2,13 +2,15 @@
   "users": [
     {
       "id": "1",
+      "name": "Vinayak Gavaroji",
       "email": "vinayak@gmail.com",
       "password": "123456"
     },
     {
       "id": "2",
+      "name": "Jane Johnson",
       "email": "jane@example.com",
-      "password": "abcdef"
+      "password": "123456"
     },
     {
       "id": "c832",
@@ -27,6 +29,24 @@
       "name": "Tony Stark",
       "email": "tony@gmail.com",
       "password": "Tony@1332"
+    }
+  ],
+
+  "profiles" : [
+    {
+      "email": "vinayak@gmail.com",
+      "contactNo" : 7892677500,
+      "bio": "Jai Shree Ram"
+    },
+    {
+      "email": "jack@gmail.com",
+      "contactNo" : 7892677500,
+      "bio": "Jai Shree Ram"
+    },
+    {
+      "email": "john@gmail.com",
+      "contactNo" : 6361856712,
+      "bio": "Har Har Mahadev"
     }
   ]
 }

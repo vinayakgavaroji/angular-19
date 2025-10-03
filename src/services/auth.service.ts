@@ -1,5 +1,6 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 
@@ -8,18 +9,21 @@ import { tap } from 'rxjs';
 })
 export class AuthService {
 
-  // ✅ Signals instead of BehaviorSubject
-  private _isLoggedIn = signal<boolean>(this.hasToken());
-
-  // Expose as read-only computed signal
+  private isBrowser: boolean;
+  private _isLoggedIn = signal<boolean>(false);
   isLoggedIn$ = computed(() => this._isLoggedIn());
 
   private _backendUrl = 'http://localhost:3000/';
 
-  constructor(private http: HttpClient, private router: Router) { }
-
-  private hasToken(): boolean {
-    return !!localStorage.getItem('token');
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+    if (this.isBrowser) {
+      this._isLoggedIn.set(!!localStorage.getItem('token'));
+    }
   }
 
   // Login method
@@ -28,7 +32,9 @@ export class AuthService {
       .pipe(
         tap(users => {
           if (users.length > 0) {
-            localStorage.setItem('token', users[0].email);
+            if (this.isBrowser) {
+              localStorage.setItem('token', users[0].email);
+            }
             this._isLoggedIn.set(true);
           } else {
             throw new Error('User does not exist');
@@ -43,9 +49,10 @@ export class AuthService {
       .pipe(
         tap(user => {
           if (user && user.email) {
-            // Store email as token (or use user.id if you prefer)
-            localStorage.setItem('token', user.email);
-            this._isLoggedIn.set(true); // ✅ Update signal
+            if (this.isBrowser) {
+              localStorage.setItem('token', user.email);
+            }
+            this._isLoggedIn.set(true);
           } else {
             throw new Error('Signup failed');
           }
@@ -55,8 +62,10 @@ export class AuthService {
 
   // Logout method
   logout() {
-    localStorage.removeItem('token');
-    this._isLoggedIn.set(false); // ✅ Update signal
+    if (this.isBrowser) {
+      localStorage.removeItem('token');
+    }
+    this._isLoggedIn.set(false);
     this.router.navigate(['/login']);
   }
 
