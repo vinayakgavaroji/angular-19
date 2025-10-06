@@ -15,6 +15,10 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   email!: string;
   usersData: any;
+  successMsg: string = ''
+  errorMsg!: String;
+  submitted: Boolean = false;
+
 
   ngOnInit() {
     this.email = decodeURIComponent(this.route.snapshot.paramMap.get('email') ?? '');
@@ -25,9 +29,9 @@ export class ProfileComponent implements OnInit {
         this.profileForm.patchValue({
           name: user.name,
           email: user.email,
-          contact: user.contact,
+          contactNo: user.contactNo,
           bio: user.bio,
-          profilePicture: user.profilePicture
+          // profilePicture: user.profilePicture
         });
       }
     });
@@ -36,7 +40,7 @@ export class ProfileComponent implements OnInit {
       if (proData && proData.length > 0) {
         const profile = proData[0];
         this.profileForm.patchValue({
-          contact: profile.contactNo,
+          contactNo: profile.contactNo,
           bio: profile.bio,
           profilePicture: profile.profilePicture
         });
@@ -52,27 +56,38 @@ export class ProfileComponent implements OnInit {
     this.profileForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      contact: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
+      contactNo: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
       bio: new FormControl('', [Validators.maxLength(200)]),
-      profilePicture: new FormControl(null)
+      // profilePicture: new FormControl(null)
     });
   }
 
+  // onSubmit() {
+  //   if (this.profileForm.valid) {
+  //     console.log('Profile Data:', this.profileForm.value);
+  //     alert('Profile saved successfully ✅');
+  //   } else {
+  //     alert('Please fill all required fields correctly.');
+  //   }
+  // }
+
   onSubmit() {
-    if (this.profileForm.valid) {
-      console.log('Profile Data:', this.profileForm.value);
-      alert('Profile saved successfully ✅');
-    } else {
-      alert('Please fill all required fields correctly.');
+    this.submitted = true;
+    if (localStorage.getItem('token') === this.profileForm.value.email) {
+      this.shared.saveProfile(this.profileForm.value).subscribe((res) => {
+        this.successMsg = 'Profile saved successfully ✅'
+      }, (err) => {
+        this.errorMsg = "Please fill all required fields correctly."
+      })
     }
   }
 
   // Preview profile picture
-  onFileChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.profileForm.patchValue({ profilePicture: file });
-    }
-  }
+  // onFileChange(event: any) {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     this.profileForm.patchValue({ profilePicture: file });
+  //   }
+  // }
 
 }

@@ -22,7 +22,10 @@ export class SharedService {
 
   getProfilesByEmail(email: string):Observable<any>{
     return this.http.get<any>(`${this._uri}?email=${email}`);
-    
+  }
+
+  saveProfile(body: any): Observable<any>{
+    return this.http.post<any>(this._uri, body);
   }
 
 }
