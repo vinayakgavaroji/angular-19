@@ -23,26 +23,24 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.email = decodeURIComponent(this.route.snapshot.paramMap.get('email') ?? '');
 
-    this.shared.getDetailsByEmailId(this.email).subscribe(userData => {
+    this.shared.getDetailsById(this.email).subscribe(userData => {
       if (userData && userData.length > 0) {
         const user = userData[0];
         this.profileForm.patchValue({
           name: user.name,
           email: user.email,
-          contactNo: user.contactNo,
-          bio: user.bio,
           // profilePicture: user.profilePicture
         });
       }
     });
 
-    this.shared.getProfilesByEmail(this.email).subscribe(proData => {
+    this.shared.getProfilesById(this.email).subscribe(proData => {
       if (proData && proData.length > 0) {
         const profile = proData[0];
         this.profileForm.patchValue({
           contactNo: profile.contactNo,
           bio: profile.bio,
-          profilePicture: profile.profilePicture
+          // profilePicture: profile.profilePicture
         });
       }
     })

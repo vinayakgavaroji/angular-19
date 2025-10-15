@@ -16,11 +16,11 @@ export class SharedService {
     return this.http.get<any>(this._url)
   }
 
-  getDetailsByEmailId(email: string):Observable<any>{
+  getDetailsById(email: string):Observable<any>{
     return this.http.get<any>(`${this._url}?email=${email}`);
   }
 
-  getProfilesByEmail(email: string):Observable<any>{
+  getProfilesById(email: string):Observable<any>{
     return this.http.get<any>(`${this._uri}?email=${email}`);
   }
 

@@ -36,6 +36,12 @@
       "name": "Tony Stark",
       "email": "tony@gmail.com",
       "password": "123456"
+    },
+    {
+      "id": "241c",
+      "name": "aaa",
+      "email": "aaa@gmail.com",
+      "password": "123456"
     }
   ],
   "profiles": [
@@ -63,6 +69,20 @@
       "email": "tony@gmail.com",
       "contactNo": "7892677500",
       "bio": "I am Ironman!"
+    },
+    {
+      "id": "1540",
+      "name": "Vinayak Gavaroji",
+      "email": "vinayak@gmail.com",
+      "contactNo": 7892677500,
+      "bio": "Jai Shree Ram"
+    },
+    {
+      "id": "d856",
+      "name": "john",
+      "email": "john@gmail.com",
+      "contactNo": 6361856712,
+      "bio": "Har Har Mahadev"
     }
   ]
 }
