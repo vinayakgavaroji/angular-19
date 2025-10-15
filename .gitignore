@@ -6,10 +6,8 @@
 /out-tsc
 /bazel-out
 
-# Database for time being
-/db.json
-
 # Node
+/db.json
 /node_modules
 npm-debug.log
 yarn-error.log
