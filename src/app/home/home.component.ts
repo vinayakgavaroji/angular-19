@@ -32,7 +32,8 @@ export class HomeComponent implements OnInit {
     { title: 'Tasks', description: 'Manage your tasks efficiently', icon: 'bi-list-task', path: '/tasks' },
     { title: 'Reports', description: 'View reports and analytics', icon: 'bi-bar-chart', path: '/reports' },
     { title: 'Shopping', description: 'Great Indian Festival Amazon', icon: 'bi-gear', path: '/shopping' },
-    { title: 'Settings', description: 'Update your preferences', icon: 'bi-gear', path: '/settings' }
+    { title: 'Settings', description: 'Update your preferences', icon: 'bi-gear', path: '/settings' },
+    { title: 'Image', description: 'Image', icon: 'bi-gear', path: '/image' }
   ];
 
 }
